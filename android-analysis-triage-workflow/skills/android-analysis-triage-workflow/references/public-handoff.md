@@ -1,0 +1,13 @@
+# Evidence-led handoff and public sharing
+
+The report should let another analyst reproduce a finding without assuming the APK is benign or malicious. A useful order is: file identity and provenance; package/Android metadata; signature results; delivered split set; coverage and decompilation gaps; behavior flow; complete permission matrix; native-library map; URL inventory; security observations; limitations; next verification steps. Use local links to saved evidence when the report remains inside the analysis workspace. A styled HTML view may be generated from a maintained text source, with no remote assets required.
+
+For each finding, pair the conclusion with the artifact path and a line, offset, method, or component identifier. Distinguish an observed test from a static inference. Do not convert a URL literal, SDK capability, native import, or declared permission into a claim of runtime activity. Explain why signature verification does not by itself establish trusted distribution or publisher identity. Record tool versions, commands or scripts, and unresolved errors.
+
+When timing and token records exist, list phases in chronological order with elapsed time and the recording method. Sum active phase durations separately from the calendar span; do not fill gaps with estimates. If model token usage is available, report input and output separately, identify cached input as a subset of input, and identify reasoning output as a subset of output. State that repeated cached context is counted again and that these numbers are not unique text or cost. If no reliable usage record exists, say so.
+
+## Public-export pass
+
+Create a separate shareable copy rather than rewriting the private evidence set. Review the entire shareable package, including HTML, Markdown, CSV/JSON, SVG, comments, metadata, logs, filenames, and screenshots. Remove or replace personal names, account and device identifiers, access tokens, keys, cookies, precise local paths, private hosts, and sensitive query values. Replace case-specific package names, APK hashes, certificate fingerprints, app icons, and exact timestamps when the case must be anonymous. Use consistent placeholders such as `APP_ID`, `HOST_A`, and `FILE_HASH_A`, with no embedded reversible mapping in the public package.
+
+Check links and images after redaction; a local link may reveal an absolute username or project path even when visible text is generic. Preserve exact unredacted values only in the private evidence set. Mark public examples as illustrative or redacted so another analyst does not mistake placeholders for extracted facts. Do not claim the *source APKs or decompiled code* are safe to publish merely because the written report has been anonymized.

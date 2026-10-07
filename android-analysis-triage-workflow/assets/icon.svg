@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">Android APK analysis</title>
+  <rect width="256" height="256" rx="54" fill="#214E71"/>
+  <path d="M65 60h81l31 31v75H65z" fill="#F2F7FB" stroke="#A4D3E8" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M146 60v31h31" fill="none" stroke="#A4D3E8" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M87 113h53M87 133h41" stroke="#6D96AB" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="155" cy="154" r="36" fill="#214E71" stroke="#75D4C5" stroke-width="12"/>
+  <path d="m181 181 31 31" stroke="#75D4C5" stroke-width="15" stroke-linecap="round"/>
+</svg>

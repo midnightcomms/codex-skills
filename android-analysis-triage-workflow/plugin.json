@@ -1,0 +1,37 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "android-analysis-triage-workflow",
+  "version": "0.1.0",
+  "description": "Evidence-led static triage of Android APKs and split APK sets for a user-supplied package name, with permission, native-code, URL, and analyst-handoff workflows.",
+  "author": {
+    "name": "midnightcomms"
+  },
+  "repository": "https://github.com/midnightcomms/codex-skills",
+  "license": "GPL-3.0-only",
+  "keywords": [
+    "android",
+    "apk",
+    "static-analysis",
+    "security-triage"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Android Analysis Triage",
+        "shortDescription": "APK triage by package name",
+        "longDescription": "Provide the Android package name to start analysis of an APK or split APK set. The workflow checks that the manifest matches, inventories code, native libraries, permissions, and URL literals, then prepares a source-linked analyst handoff. No external account or MCP server is required.",
+        "developerName": "midnightcomms",
+        "category": "Developer Tools",
+        "capabilities": [
+          "Analyze APKs and split sets",
+          "Map permissions and native code",
+          "Prepare analyst handoffs"
+        ],
+        "defaultPrompt": "Analyze this APK for package PACKAGE_NAME using $android-analysis-triage-workflow.",
+        "brandColor": "#214E71",
+        "composerIcon": "./assets/icon.svg",
+        "logo": "./assets/icon.svg"
+      }
+    }
+  }
+}

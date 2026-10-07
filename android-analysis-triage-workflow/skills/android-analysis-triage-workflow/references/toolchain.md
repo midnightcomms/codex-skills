@@ -1,0 +1,21 @@
+# Toolchain and preflight
+
+The skill does not bundle executables or install packages. Check availability before starting a requested phase, record each tool's version (and source commit for a local build), and use a compatible equivalent only when it supports the same claim. A missing tool limits coverage; it does not justify presenting an unverified result as complete. Local CLI tools are documented here rather than in `agents/openai.yaml`, whose dependency field is for MCP tools.
+
+| Capability | Preferred tools or equivalent | Needed when | If unavailable |
+|---|---|---|---|
+| File integrity and archive inventory | `sha256sum` or Python `hashlib`; `unzip`/`zipinfo` or Python `zipfile` | Every APK set | Do not claim file integrity or complete contents. |
+| Android metadata and signatures | Android SDK tools: `aapt2` or `apkanalyzer`, plus `apksigner`; `apktool` for decoded resources/manifest | Package, manifest, component, or signer findings | Mark the relevant metadata/signature claim unverified. A decoded manifest alone does not verify a signature. |
+| Device-based acquisition or dynamic checks | Android Platform Tools: `adb` and `logcat`; compatible device/emulator | Pulling an installed split set or observing runtime behavior | Analyze supplied files statically; do not infer runtime behavior. |
+| Play delivery acquisition | A user-authorized Play client that can retrieve the complete base-and-split set, or `adb` from a legitimately installed app | The user requests acquisition rather than supplying files | Request the files or use an available authorized method; do not claim the APK came from Play without delivery evidence. |
+| DEX source reconstruction | `jadx` CLI or GUI | Mapping Java/Kotlin bytecode to code paths | Use smali/DEX tooling and report lower source-level coverage. |
+| Independent DEX comparison | `dex2jar`, Fernflower, and a compatible JDK; `apktool`/baksmali for bytecode cross-checks | Comparing decompilers or resolving a critical method | State that no independent reconstruction was performed; inspect bytecode where possible. |
+| Hermes/JavaScript bundle analysis | A tool compatible with the bundle's Hermes bytecode version, such as `hermes-dec`/`hbc-file-parser`, plus a text search tool | APK contains a Hermes bundle and its app logic matters | Record the bundle as opaque; do not infer routes or API behavior from Java wrappers alone. |
+| Native ELF inspection | radare2 (`rabin2`, `r2`); `readelf`/`objdump` can cover narrower metadata | APK contains `.so` files and native analysis is in scope | Report libraries as inventoried but unanalysed; do not claim hardening or JNI reachability. |
+| URL inventory and evidence search | `rg` or equivalent; Python 3 for reproducible extraction, deduplication, and CSV output | Complete literal inventory or code-to-evidence mapping | Use a documented manual subset and label it incomplete. |
+| Diagrams and handoff | Mermaid source or an SVG/HTML renderer; Markdown/HTML tooling as available | A visual structure/flow or report is requested | Keep a text flow and evidence links; distinguish an unrendered diagram from a displayed one. |
+| Current platform/control references | [Android API reference](https://developer.android.com/reference); [OWASP MASVS](https://mas.owasp.org/MASVS/) when requested | Platform behavior or MASVS-level claims | State that the interpretation has not been checked against current guidance. |
+
+For a full static workflow, expect file/ZIP tooling, Android SDK tools, a manifest decoder, JADX, and a text/data-processing environment. Add the conditional tools only for the features present or the user's requested comparison. Cloning and building a tool is an implementation choice, not a prerequisite; when requested, record its upstream repository, commit, build result, and exact binary used. Do not treat a clone alone as a working installation.
+
+Useful preflight checks include `command -v` for installed CLIs, `java -version`, `python3 --version`, `jadx --version`, `apksigner --version`, and `rabin2 -v`. Tool names and flags can vary by release; verify the installed tool's help before scripting it. Save commands and logs with the analysis so another analyst can reproduce each result.
