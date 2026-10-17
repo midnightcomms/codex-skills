@@ -1,0 +1,16 @@
+name: Check plugin archive
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Verify current-version ZIP and source contents
+        run: python3 scripts/package_latest_plugin.py --check

@@ -2,6 +2,8 @@
 
 This repository contains the **Android Analysis Triage Workflow** plugin, version `0.3.0`, by `midnightcomms`. The plugin source is in [`android-analysis-triage-workflow/`](android-analysis-triage-workflow/), with a Codex marketplace descriptor in [`.agents/plugins/marketplace.json`](.agents/plugins/marketplace.json). A ready-to-share archive is available as [`android-analysis-triage-workflow-0.3.0.zip`](android-analysis-triage-workflow-0.3.0.zip).
 
+Keep only the ZIP for the version declared in `android-analysis-triage-workflow/plugin.json`. After updating the plugin source and its matching skill version, run `python3 scripts/package_latest_plugin.py`; it rebuilds the current archive and removes older versioned ZIPs. Commit the ZIP addition and deletions with the source changes. The GitHub workflow runs `python3 scripts/package_latest_plugin.py --check` on pushes and pull requests to reject stale or mismatched archives.
+
 To add the Git-backed marketplace and install the plugin with Codex CLI:
 
 ```bash
