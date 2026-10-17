@@ -1,4 +1,4 @@
 interface:
   display_name: "Android Analysis Triage Workflow"
-  short_description: "Triage named Android packages and APKs"
+  short_description: "Triage named APKs with isolated dynamic runs"
   default_prompt: "Analyze this APK for package PACKAGE_NAME using $android-analysis-triage-workflow."

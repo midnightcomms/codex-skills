@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "android-analysis-triage-workflow",
-  "version": "0.1.0",
-  "description": "Evidence-led static triage of Android APKs and split APK sets for a user-supplied package name, with permission, native-code, URL, and analyst-handoff workflows.",
+  "version": "0.2.0",
+  "description": "Evidence-led static and isolated dynamic triage of Android APKs and split APK sets for a user-supplied package name, with an analyst handoff.",
   "author": {
     "name": "midnightcomms"
   },
@@ -18,12 +18,13 @@
     "com.openai": {
       "interface": {
         "displayName": "Android Analysis Triage",
-        "shortDescription": "APK triage by package name",
-        "longDescription": "Provide the Android package name to start analysis of an APK or split APK set. The workflow checks that the manifest matches, inventories code, native libraries, permissions, and URL literals, then prepares a source-linked analyst handoff. No external account or MCP server is required.",
+        "shortDescription": "Static and isolated dynamic APK triage",
+        "longDescription": "Provide the Android package name to start APK or split-set analysis. A full triage checks the manifest, inspects code, permissions, libraries, and URLs, then runs the app for five minutes in an Android emulator inside a disposable VM with a verified Tor/Privoxy gateway. The handoff includes image hashes and runtime logs. No external account or MCP server is required.",
         "developerName": "midnightcomms",
         "category": "Developer Tools",
         "capabilities": [
           "Analyze APKs and split sets",
+          "Run gated five-minute Android observations",
           "Map permissions and native code",
           "Prepare analyst handoffs"
         ],
