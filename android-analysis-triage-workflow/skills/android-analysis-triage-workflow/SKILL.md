@@ -3,7 +3,7 @@ name: android-analysis-triage-workflow
 description: Triage Android APKs or split APK sets for a user-supplied package name with static and isolated dynamic analysis, then produce an evidence-led analyst handoff. Use for APK reverse-engineering or security triage requests, not ordinary Android app development.
 metadata:
   author: midnightcomms
-  version: 0.3.0
+  version: 0.3.1
 ---
 
 # Android Analysis Triage Workflow
@@ -19,6 +19,8 @@ Example invocation: "Analyze this APK for package `com.example.app` using `$andr
 ## Tool preflight
 
 This skill supplies instructions, not the executables or an isolation environment. Before analysis, check the tools needed for the requested scope: an archive reader and hashing tool for every APK; Android SDK Build Tools and a manifest decoder for package/signature findings; JADX for DEX decompilation. Add `adb` for device acquisition, dex2jar + Fernflower for a second Java reconstruction, a compatible Hermes tool when Hermes is present, and radare2 for native-library analysis. A full triage also needs a disposable VM, Google Android SDK image/emulator tools, guest-side Docker, Tor, Privoxy, and enforceable guest network controls. See the [toolchain and fallback matrix](references/toolchain.md). Record tool versions and source commits; do not silently skip a requested phase.
+
+For a Codex managed sandbox, read the [sandbox runtime preflight](references/codex-sandbox-runtime.md) before declaring ADB or Docker unavailable. The task sandbox may deny local sockets even when both runtimes are installed. Retry the same narrow diagnostic with the environment's approved escalation mechanism, then distinguish socket access from device boot, Docker daemon health, VM isolation, and gateway routing. Escalation alone never satisfies the dynamic isolation gate.
 
 1. Establish the delivered file set, provenance, hashes, signature results, package/version, device configuration, and missing splits. Record what verification establishes and what it does not.
 2. Inventory manifests, DEX files, resources, JavaScript bundles, and native libraries. Decompile relevant DEX and bundle code; retain logs, failures, and unresolved methods. Compare a second decompiler when a conclusion depends on incomplete output.

@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "android-analysis-triage-workflow",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Evidence-led static and isolated dynamic triage of Android APKs and split APK sets for a user-supplied package name, with an analyst handoff.",
   "author": {
     "name": "midnightcomms"
@@ -19,7 +19,7 @@
       "interface": {
         "displayName": "Android Analysis Triage",
         "shortDescription": "Static and isolated dynamic APK triage",
-        "longDescription": "Provide the Android package name to start APK or split-set analysis. A full triage checks the manifest, code, permissions, libraries, and URLs, then runs the app for five minutes in an Android emulator inside a disposable VM with a verified Tor/Privoxy gateway. The handoff includes image hashes, runtime logs, a hashed file-change inventory, and existing VirusTotal reports for APK and created-file hashes. VirusTotal enrichment requires a connected VirusTotal plugin.",
+        "longDescription": "Provide the Android package name to start APK or split-set analysis. A full triage checks the manifest, code, permissions, libraries, and URLs, then runs the app for five minutes in an Android emulator inside a disposable VM with a verified Tor/Privoxy gateway. Managed-sandbox preflight distinguishes ADB and Docker socket restrictions from VM and emulator failures. The handoff includes image hashes, runtime logs, a hashed file-change inventory, and existing VirusTotal reports for APK and created-file hashes. VirusTotal enrichment requires a connected VirusTotal plugin.",
         "developerName": "midnightcomms",
         "category": "Developer Tools",
         "capabilities": [
